@@ -21,7 +21,7 @@ public class User {
 	@Column(name="fullname", length = 180)
 	private String fullName;
 	
-	@Column(name="email", length = 180)
+	@Column(name="email", length = 180, unique = true)
 	private String email;
 
 	public User(String id, String fullName, String email) {
