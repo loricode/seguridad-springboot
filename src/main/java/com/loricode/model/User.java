@@ -23,6 +23,10 @@ public class User {
 	
 	@Column(name="email", length = 180, unique = true)
 	private String email;
+	
+	public User() {
+		
+	}
 
 	public User(String id, String fullName, String email) {
 		this.id = id;
@@ -41,7 +45,6 @@ public class User {
 	public String getEmail() {
 		return email;
 	}
-	
 	
 	
 }

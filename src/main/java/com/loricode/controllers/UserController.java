@@ -1,5 +1,8 @@
 package com.loricode.controllers;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,19 +15,20 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.loricode.model.User;
+import com.loricode.services.UserService;
 
 @RestController
 @CrossOrigin
 @RequestMapping("/api/users")
 public class UserController {
 
+	@Autowired
+	private UserService userService;
 	
 	@GetMapping("list")
-	public ResponseEntity<String[]> getListUsers(){
+	public ResponseEntity<List<User>> getListUsers(){
 		
-		String[] nombres = { "nombre a", "nombre b"};
-		
-		return ResponseEntity.ok(nombres);
+		return ResponseEntity.ok(userService.getListUser());
 	}
 	
 	@PostMapping("add")
