@@ -14,9 +14,42 @@ public class UserService {
 	@Autowired
 	private IUserRepository Iuser;
 
+
 	public List<User> getListUser () {
 		
 		return Iuser.getListUsers();
+		
 	}
+	
+	public boolean addUser(String fullName, String email) {
+		
+		try {
+			
+			Iuser.addUser(fullName, email);
+			
+			return true;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return false;
+	}
+	
+    public boolean updateUser(String id, String fullName, String email) {
+		
+		try {
+			
+			Iuser.updateUser(id, fullName, email);
+			
+			return true;
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		return false;
+	}
+	
 	
 }

@@ -27,20 +27,22 @@ public class UserController {
 	
 	@GetMapping("list")
 	public ResponseEntity<List<User>> getListUsers(){
-		
+
 		return ResponseEntity.ok(userService.getListUser());
 	}
 	
 	@PostMapping("add")
-	public ResponseEntity<String> addUsers(@RequestBody User user){
-		
-		return ResponseEntity.ok("add email: "+ user.getEmail());
+	public ResponseEntity<Boolean> addUser(@RequestBody User user){
+				
+		return ResponseEntity.ok(
+				userService.addUser(user.getFullName(), user.getEmail()));
 	}
 	
 	@PutMapping("update/{id}")
-	public ResponseEntity<String> updateUser(@PathVariable String id){
+	public ResponseEntity<Boolean> updateUser(@PathVariable String id, @RequestBody User user){
 		
-		return ResponseEntity.ok("update: "+ id );
+	return ResponseEntity.ok(
+			userService.updateUser(id, user.getFullName(), user.getEmail()));
 	}
 	
 	@DeleteMapping("delete")

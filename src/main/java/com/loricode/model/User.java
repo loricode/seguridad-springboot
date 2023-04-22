@@ -2,11 +2,17 @@ package com.loricode.model;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
+
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+
 
 @Entity
 @Table(name="users")
@@ -46,5 +52,27 @@ public class User {
 		return email;
 	}
 	
+	@JsonIgnore
+	@ManyToOne
+    public Company company;
 	
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public void setCompany(Company company) {
+		this.company = company;
+	}
+
+	public Company getCompany() {
+		return company;
+	}
 }
