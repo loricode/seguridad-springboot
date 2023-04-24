@@ -1,12 +1,16 @@
 package com.loricode.services;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.loricode.repositories.ICompanyRepository;
+
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.loricode.dtos.*;
 import com.loricode.model.Company;
 import com.loricode.model.User;
@@ -23,24 +27,38 @@ public class CompanyService {
 	
 	public List<CompanyUserDto> getListCompanies(){
 		
-		List<CompanyUserDto> data = new ArrayList<>();
+		List<CompanyDto> list = this.iCompanyRepository.getListCompanies();
 		
-		List<CompanyDto> results = this.iCompanyRepository.getListCompanies();
+		List<CompanyUserDto> companyUser = new ArrayList<>();
 		
-		results.forEach(x -> {
-			List<User> userList = new ArrayList<>();
+		ObjectMapper mapper = new ObjectMapper();
+		
+	     	list.forEach(x -> {
+	     		
+	     		CompanyUserDto company = new CompanyUserDto();
+	     		
+	           try  { 
+	        	  
+	        	   User[] jsonObj = mapper.readValue(x.getJsonString(), User[].class);
+	        	   
+	        	   List<User> userList = new ArrayList<>(Arrays.asList(jsonObj));
+				  
+	        	   company.setCompanyId(x.getCompanyId());
+				   company.setDescription(x.getDescription());
+				   company.setName(x.getName());
+				   company.setUserList(userList);
+				   
+				   companyUser.add(company);
+						  		   
+				   
+	     	      } catch (JsonProcessingException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			
-			CompanyUserDto company = new CompanyUserDto();	
-			
-			userList.add(new User(x.getId(), x.getFullName(), x.getEmail()));
-			company.setCompanyId(x.getCompanyId());
-			company.setName(x.getName());
-			company.setDescription(x.getDescription());
-			company.setUserList(userList);
-			data.add(company);
-		});
-	
-		return data;
+		    });
+		
+           return companyUser;
 	}
 	
 }

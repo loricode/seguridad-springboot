@@ -1,6 +1,5 @@
 package com.loricode.dtos;
 
-
 public interface CompanyDto {
 	
 	String getCompanyId();
@@ -9,10 +8,6 @@ public interface CompanyDto {
 	
 	String getDescription();
 	
-	String getId();
-	
-	String getEmail();
-	
-	String getFullName();
+	String getJsonString();
 	
 }

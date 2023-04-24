@@ -9,11 +9,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
 import com.loricode.dtos.CompanyUserDto;
 import com.loricode.model.Company;
 import com.loricode.services.CompanyService;
-
 
 @RestController
 @CrossOrigin

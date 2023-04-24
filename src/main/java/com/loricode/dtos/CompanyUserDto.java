@@ -11,7 +11,6 @@ public class CompanyUserDto {
 	private String name;
 	
 	private String description;
-	
 
 	public String getCompanyId() {
 		return companyId;
@@ -42,7 +41,7 @@ public class CompanyUserDto {
 	
      public CompanyUserDto() {
 		
-	}
+	 }
 
 	public void setUserList(List<User> userList) {
 		this.userList = userList;

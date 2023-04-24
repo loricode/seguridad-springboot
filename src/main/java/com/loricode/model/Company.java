@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Column;
@@ -14,6 +15,7 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
+import jakarta.persistence.Transient;
 
 
 @Entity
@@ -57,6 +59,19 @@ public class Company {
 	@OneToMany(cascade = CascadeType.ALL, fetch=FetchType.EAGER, mappedBy = "company")
     public List<User> usersList = new ArrayList<User>();
 
+
+	public List<User> getUsersList() {
+		return usersList;
+	}
+
+	@JsonIgnore
+	@Transient
+	public String jsonString;
+	
+
+	public String getJsonString() {
+		return jsonString;
+	}
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
